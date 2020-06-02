@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "209722476436",
+    "firebase_url": "https://baitadelivery-1bc97.firebaseio.com",
+    "project_id": "baitadelivery-1bc97",
+    "storage_bucket": "baitadelivery-1bc97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:209722476436:android:294d813d069bdeee7ab181",
+        "android_client_info": {
+          "package_name": "felipe.samu.baitadelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "209722476436-p3hhkoqbo0fc5vvbdcc058rrjipc9nae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "felipe.samu.baitadelivery",
+            "certificate_hash": "a7d40b218e9d0c148a522e9e9a19c2743fad894d"
+          }
+        },
+        {
+          "client_id": "209722476436-8ihi9bt831q7oi64sl9jao78dp79ms2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPHTzPr9hiPZJvk8S0_wE4VhVF5QU3EOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "209722476436-8ihi9bt831q7oi64sl9jao78dp79ms2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

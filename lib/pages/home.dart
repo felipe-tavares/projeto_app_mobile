@@ -1,7 +1,7 @@
 import 'package:baitadelivery/components/menu_inferior.dart';
 import 'package:baitadelivery/pages/novo_pet.dart';
 import 'package:flutter/material.dart';
-import '../model/Animal.dart';
+import '../model/Produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatefulWidget {
@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
 
   _body() {
     return StreamBuilder(
-        stream: db.collection("animais").snapshots(),
+        stream: db.collection("Produtos").snapshots(),
 // ignore: missing_return
         builder: (context, snapshot) {
           switch( snapshot.connectionState ) {
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
               return Center(
                 child: Column(
                   children: <Widget>[
-                    Text("Carregando animais..."),
+                    Text("Carregando produtos..."),
                     CircularProgressIndicator()
                   ],
                 ),
@@ -70,18 +70,18 @@ class _HomeState extends State<Home> {
                     child: ListView.builder(
                         itemCount: querySnapshot.documents.length,
                         itemBuilder: (context, index) {
-                          //recupera os animais
-                          List<DocumentSnapshot> animais = querySnapshot.documents.toList();
-                          DocumentSnapshot dados = animais[index];
+                          //recupera os produtos
+                          List<DocumentSnapshot> produtos = querySnapshot.documents.toList();
+                          DocumentSnapshot dados = produtos[index];
 
-                          Animal animal = Animal(dados["nome"], dados["idade"], dados["raca"], dados["foto"]);
+                          Produto produto = Produto(dados["nome"], dados["imagem"], dados["marca"], dados["preco"], dados["mercado"], dados["volume"]);
 
                           return ListTile(
                             leading: CircleAvatar(
-                              backgroundImage: NetworkImage(animal.foto),
+                              backgroundImage: NetworkImage(produto.imagem),
                             ),
-                            title: Text( animal.nome ),
-                            subtitle: Text( animal.raca + ", " + animal.idade + " anos."),
+                            title: Text( produto.nome ),
+                            subtitle: Text( produto.marca + ", R\$ " + produto.preco),
                           );
                         }
                     )

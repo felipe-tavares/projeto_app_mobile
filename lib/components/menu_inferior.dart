@@ -1,3 +1,7 @@
+import 'package:baitadelivery/pages/cart_page.dart';
+import 'package:baitadelivery/pages/perfil.dart';
+
+
 import 'package:flutter/material.dart';
 
 class MenuInferior extends StatelessWidget {
@@ -16,28 +20,28 @@ class MenuInferior extends StatelessWidget {
                 padding: EdgeInsets.only(right: 20.0, left: 20.0),
                 color: Colors.blue,
                 icon: Icon(Icons.home),
+                tooltip: ("Home"),
                 onPressed: () {/* */}
             ),
 
             IconButton(
                 padding: EdgeInsets.only(right: 50.0, left: 50.0),
                 color: Colors.blue,
-                icon: Icon(Icons.pets),
-                onPressed: () {/* */}
+                icon: Icon(Icons.person),
+                tooltip: ("Perfil"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Perfil()));
+                },
             ),
 
             IconButton(
                 padding: EdgeInsets.only(right: 30.0, left: 30.0),
                 color: Colors.blue,
-                icon: Icon(Icons.person),
-                onPressed: () {/* */}
-            ),
-
-            IconButton(
-                padding: EdgeInsets.only(right: 20.0, left: 20.0),
-                color: Colors.blue,
-                icon: Icon(Icons.event),
-                onPressed: () {/* */}
+                icon: Icon(Icons.shopping_cart),
+                tooltip: ("Meu Carrinho"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
+                },
             ),
           ],
         ),

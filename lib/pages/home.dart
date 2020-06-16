@@ -1,8 +1,8 @@
 import 'package:baitadelivery/components/menu_inferior.dart';
-import 'package:baitadelivery/pages/novo_pet.dart';
 import 'package:flutter/material.dart';
 import '../model/Produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,23 +15,22 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Produtos")),
+      appBar: AppBar(
+          title: Text("Produtos"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+            onPressed: (){/*showSearch(context: context, delegate:  ProductSearch));*/},
+          )],
+      ),
 
       body: _body(),
 
       bottomNavigationBar: MenuInferior(),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(
-                  builder: (context) => NovoPet()
-              )
-          );
-        },
-        tooltip: 'Novo Pet',
-        child: Icon(Icons.add),
-      ),
     );
   }
 
@@ -85,6 +84,8 @@ class _HomeState extends State<Home> {
                           );
                         }
                     )
+
+
                 );
               }
           }
@@ -93,6 +94,9 @@ class _HomeState extends State<Home> {
 
     );
 
+
+
   }
 
 }
+

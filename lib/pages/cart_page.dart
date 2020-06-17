@@ -31,7 +31,7 @@ class _CartState extends State<Cart> {
             )),
 
             Expanded(
-              child: new MaterialButton(onPressed: (){},
+              child: new MaterialButton(onPressed: (){/* COLOCAR PRA ONDE VAI DEPOIS DE FAZER CHECKOUT */},
               child: new Text("Check Out", style: TextStyle(color: Colors.black),),
               color: Colors.grey,
               )

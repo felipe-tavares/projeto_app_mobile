@@ -81,7 +81,27 @@ class _HomeState extends State<Home> {
                             ),
                             title: Text( produto.nome ),
                             subtitle: Text( produto.marca + ", R\$ " + produto.preco),
+                            trailing: IconButton(icon: Icon(Icons.plus_one),
+                                onPressed: () {
+
+                              /* ADICIONAR AQUI O QUE FAZER QUANDO CLICAR NO BOTÃO PARA ADICIONAR O PRODUTO AO CARRINHO */
+
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("+1 " + produto.nome + " " + produto.marca + " adicionado ao carrinho"),
+                                    action: SnackBarAction(
+                                      label: 'Undo',
+                                      onPressed: () {
+                                        // ADICIONAR AQUI O QUE FAZER QUANDO CLICAR NO BOTÃO PARA REMOVER O PRODTUO DO CARRINHO "UNDO"
+                                      },
+                                    ),
+                                   )
+                                  );
+
+
+                            }),
+
                           );
+
                         }
                     )
 
@@ -93,8 +113,6 @@ class _HomeState extends State<Home> {
         }
 
     );
-
-
 
   }
 

@@ -1,72 +1,97 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '../model/Usuario.dart';
 import '../pages/home.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Cadastro extends StatelessWidget {
+class Cadastro extends StatefulWidget {
+  @override
+  _CadastroState createState() => _CadastroState();
+}
 
+class _CadastroState extends State<Cadastro> {
   TextEditingController _nomeController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _senhaController = TextEditingController();
 
+  // state var
+  String _erroMsg = "";
+
+  _cadastrar(Usuario usuario){
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth.createUserWithEmailAndPassword(
+        email: usuario.email,
+        password: usuario.senha
+    ).then((firebaseUser) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+            (Route<dynamic> route) => false,
+      );
+    }).catchError((error){
+      print("Error from Firebase: "+error.toString());
+      setState(() {
+        _erroMsg = "Error on user register. Confirm your name and password!";
+      });
+    });
+
+  }
+
+  _validacao(){
+    String nome = _nomeController.text;
+    String email = _emailController.text;
+    String senha = _senhaController.text;
+
+    if(nome.isNotEmpty || email.isNotEmpty || senha.isNotEmpty){
+      if(!email.contains("@")){
+        setState(() {
+          _erroMsg = "Inform a valid email!";
+        });
+      }else if(senha.length < 8){
+        setState(() {
+          _erroMsg = "Password must contain at least 8 characters!";
+        });
+      }else{
+        setState(() {
+          _erroMsg = "";
+        });
+
+        Usuario usuario = Usuario();
+        usuario.nome = nome;
+        usuario.email = email;
+        usuario.senha = senha;
+
+        _cadastrar(usuario);
+      }
+    }else{
+      setState(() {
+        _erroMsg = "Fill in all the data fields!";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey,
       resizeToAvoidBottomPadding: false,
       body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
-          children: <Widget>[
-            Padding(
-                padding: EdgeInsets.only(top: 70, left: 70, right: 70),
-                child:
-                Image.asset("assets/images/logo.png"
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 80, left: 30, right: 30),
+                child: Image.asset(
+                    "assets/images/logo.png"
+                ),
               ),
-            ),
-
-            Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 40, left: 30, right: 30),
                 child: TextField(
-                  decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(50.0),
-                      ),
-                    ),
-                    contentPadding:
-                      new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                      filled: true,
-                      fillColor: Colors.white,
-                      alignLabelWithHint: true,
-                      hintText: 'Nome Completo',
-                  ),
-                  keyboardType: TextInputType.text,
-                ),
-            ),
-
-            Padding(
-                padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(50.0),
-                      ),
-                    ),
-                    contentPadding:
-                    new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                    filled: true,
-                    fillColor: Colors.white,
-                    alignLabelWithHint: true,
-                    hintText: 'E-mail',
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                ),
-            ),
-
-            Padding(
-                padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-                child: TextField(
-                  obscureText: true,
                   decoration: InputDecoration(
                     border: new OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.blue, width: 0.0),
@@ -74,143 +99,116 @@ class Cadastro extends StatelessWidget {
                         const Radius.circular(50.0),
                       ),
                     ),
-                    contentPadding:
-                    new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                    contentPadding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                     filled: true,
                     fillColor: Colors.white,
                     alignLabelWithHint: true,
-                    hintText: 'Senha',
+                    hintText: 'Name',
                   ),
+                  controller: _nomeController,
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 30, right: 30),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(50.0),
+                      ),
+                    ),
+                    contentPadding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+
+                    filled: true,
+                    fillColor: Colors.white,
+
+                    alignLabelWithHint: true,
+                    hintText: 'E-mail',
+                  ),
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 10, left: 30, right: 30),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(50.0),
+                      ),
+                    ),
+                    contentPadding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+
+                    filled: true,
+                    fillColor: Colors.white,
+
+                    alignLabelWithHint: true,
+                    labelText: 'Password',
+                  ),
+                  controller: _senhaController,
                   keyboardType: TextInputType.text,
                 ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-              child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(11),
-                  WhitelistingTextInputFormatter(RegExp("[0-9]")),
-                ],
-                decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.blue, width: 0.0),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
-                  ),
-                  contentPadding:
-                  new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  filled: true,
-                  fillColor: Colors.white,
-                  alignLabelWithHint: true,
-                  hintText: 'Telefone',
-                ),
-                keyboardType: TextInputType.number,
               ),
-            ),
 
-            Padding(
-              padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-              child: TextField(
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(8),
-                  WhitelistingTextInputFormatter(RegExp("[0-9]")),
-                ],
-                decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.blue, width: 0.0),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
-                  ),
-                  contentPadding:
-                  new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  filled: true,
-                  fillColor: Colors.white,
-                  alignLabelWithHint: true,
-                  hintText: 'CEP',
-                  //errorText: 'Digite um CEP válido',
+              Padding(padding: EdgeInsets.only(top: 20, left: 30, right: 30),
+                child: Text(
+                  _erroMsg,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                keyboardType: TextInputType.number,
               ),
-            ),
 
-            Padding(
-              padding: EdgeInsets.only(top: 10, left: 30, right: 30),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: new OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.blue, width: 0.0),
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(50.0),
-                    ),
-                  ),
-                  contentPadding:
-                  new EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  filled: true,
-                  fillColor: Colors.white,
-                  alignLabelWithHint: true,
-                  hintText: 'Endereço',
-
-                ),
-                keyboardType: TextInputType.text,
-              ),
-            ),
-
-            Padding(
-                padding: EdgeInsets.only(top: 20, left: 30, right: 30),
+              Padding(
+                padding: EdgeInsets.only(top: 12, left: 30, right: 30),
                 child: ButtonBar(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                      width: 130,
-                      child:
-                      FlatButton(
+                      width: 110,
+                      child: FlatButton(
                         shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blue),
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.white)
                         ),
-                        child: Text('CADASTRAR',
+                        child: Text('REGISTER',
                           style: TextStyle(
                               fontFamily: 'Oswald',
                               color: Colors.white
                           ),
                         ),
-                        color: Colors.blue,
-                        onPressed: () {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => Home()),
-                              (Route<dynamic> route) => false,
-                          );
+                        onPressed: (){
+                          _validacao();
                         },
                       ),
                     ),
 
                     Container(
-                      width: 130,
-                      child:
-                      FlatButton(
+                      width: 110,
+                      child: FlatButton(
                         shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.white),
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.white)
                         ),
-                        child: Text('VOLTAR',
+                        child: Text('BACK',
                           style: TextStyle(
                               fontFamily: 'Oswald',
                               color: Colors.white
                           ),
                         ),
-                        onPressed: () {
-                        Navigator.pop(context);
+                        //color: Colors.blue,
+                        onPressed: (){
+                          Navigator.pop(context);
                         },
                       ),
                     ),
                   ],
                 ),
-            ),
-          ],
+              ),
+
+            ]
         ),
       ),
     );

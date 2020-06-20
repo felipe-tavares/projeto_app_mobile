@@ -7,6 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cf6129a9-ec9d-446f-8da6-9c1dcda2ce13" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/android/android.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/pages/end.dart" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/lib/pages/locator.dart" afterDir="false" />
@@ -737,12 +738,23 @@
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/model/Usuario.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model/Usuario.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/cart_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/cart_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/home.dart" afterDir="false" />
+    </list>
+>>>>>>> 0c951ca2dfe420ce8710c68220c06d6b8aadee19
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="H4AXB601X865MVY" />
+=======
+>>>>>>> 0c951ca2dfe420ce8710c68220c06d6b8aadee19
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -756,7 +768,11 @@
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
       <set>
+<<<<<<< HEAD
         <option value="C:\Users\samuk_000\AndroidStudioProjects\projeto_app_mobile\.idea" />
+=======
+        <option value="$PROJECT_DIR$/.idea" />
+>>>>>>> 0c951ca2dfe420ce8710c68220c06d6b8aadee19
       </set>
     </option>
   </component>
@@ -818,25 +834,37 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="801" y="271" width="374" height="562" key="#com.intellij.ide.util.MemberChooser" timestamp="1592415205512">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="801" y="271" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1592415205512" />
     <state x="313" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1591123263045">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="313" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1591123263045" />
-    <state width="881" height="278" key="GridCell.Tab.0.bottom" timestamp="1591126006774">
+    <state width="1807" height="277" key="GridCell.Tab.0.bottom" timestamp="1592413849763">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state width="1807" height="277" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1592413849763" />
     <state width="881" height="278" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1591126006774" />
-    <state width="881" height="278" key="GridCell.Tab.0.center" timestamp="1591126006773">
+    <state width="1807" height="277" key="GridCell.Tab.0.center" timestamp="1592413849763">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state width="1807" height="277" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1592413849763" />
     <state width="881" height="278" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1591126006773" />
-    <state width="881" height="278" key="GridCell.Tab.0.left" timestamp="1591126006773">
+    <state width="1807" height="277" key="GridCell.Tab.0.left" timestamp="1592413849762">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state width="1807" height="277" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1592413849762" />
     <state width="881" height="278" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1591126006773" />
-    <state width="881" height="278" key="GridCell.Tab.0.right" timestamp="1591126006774">
+    <state width="1807" height="277" key="GridCell.Tab.0.right" timestamp="1592413849763">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
+    <state width="1807" height="277" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1592413849763" />
     <state width="881" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1591126006774" />
+    <state x="657" y="253" key="run.anything.popup" timestamp="1591634227848">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="657" y="253" key="run.anything.popup/67.27.1853.1053/1920.0.1280.1024@67.27.1853.1053" timestamp="1591634227848" />
   </component>
 </project>

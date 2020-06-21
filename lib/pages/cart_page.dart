@@ -11,17 +11,18 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   Firestore db = Firestore.instance;
-  String user;
   //num _soma = 0;//valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
   //var myDouble = double.parse('123.45');
   //var myInt = int.parse('12345');
   String _getUser() {
-    FirebaseAuth.instance.currentUser().then((currentUser) => {
-      if(currentUser != "") {
+    String user = "3Sef58VOM0gRQ9TlBEK89HAxBOq1";
+    /*FirebaseAuth.instance.currentUser().then((currentUser) => {
+      if(currentUser != null) {
         user = currentUser.uid,
+      }else{
+        user = "4 some reason, there is no currentUser",
       }
-    });
-    print("USERID: "+user);
+    });*/
     return user;
   }
 
@@ -39,7 +40,7 @@ class _CartState extends State<Cart> {
             onPressed: (){/*showSearch(context: context, delegate:  ProductSearch));*/},
           )],
       ),
-/*
+
       //nesta tela falta atualizar o valor total
       body: StreamBuilder(
           stream: db.collection(_getUser()).document("produtos").collection("produtos").snapshots(),
@@ -95,7 +96,7 @@ class _CartState extends State<Cart> {
                 break;
             }
           }
-      ),*/
+      ),
 
       bottomNavigationBar: new Container(
         color: Colors.white,

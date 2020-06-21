@@ -88,6 +88,20 @@ class _CartState extends State<Cart> {
                             ),
                             title: Text(produto.nome),
                             subtitle: Text( produto.quantidade.toString() + "x R\$" + produto.preco),
+                            trailing: IconButton(icon: Icon(Icons.remove_circle),
+                              color: Colors.red,
+                              onPressed: (){
+
+                                  Firestore.instance.runTransaction((Transaction myTransaction) async {
+                                  await myTransaction.delete(snapshot.data.documents[index].reference);
+                                });
+
+
+                              }
+
+
+                            )
+
                           );
                         }
                     ),

@@ -180,14 +180,6 @@ class _HomeState extends State<Home> {
 
                                     Scaffold.of(context).showSnackBar(SnackBar(
                                       content: Text("+1 " + produto.nome + " " + produto.marca + " adicionado ao carrinho"),
-                                      action: SnackBarAction(
-                                        label: 'Undo',
-                                        onPressed: () {
-                                          // ADICIONAR AQUI O QUE FAZER QUANDO CLICAR NO BOTÃO PARA REMOVER O PRODUTO DO CARRINHO "UNDO"
-
-                                          //remover da data base criada, ou criar alguma função de tempo, pra só adicionar se n clicar no undo
-                                        },
-                                      ),
                                     )
                                     );
 

@@ -5,13 +5,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../model/Produto.dart';
 
 class Cart extends StatefulWidget {
+  final num soma;
+
+  const Cart({Key key, this.soma}) : super(key: key);
+
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
+  num total = 0;
   Firestore db = Firestore.instance;
-  //num _soma = 0;//valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
+  //valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
   //var myDouble = double.parse('123.45');
   //var myInt = int.parse('12345');
   String _getUser() {
@@ -28,6 +33,7 @@ class _CartState extends State<Cart> {
 
   @override
   Widget build(BuildContext context) {
+    total = widget.soma;
     return Scaffold(
       appBar: AppBar(
         title: Text("Meu Carrinho"),
@@ -94,11 +100,12 @@ class _CartState extends State<Cart> {
 
                                   Firestore.instance.runTransaction((Transaction myTransaction) async {
                                   await myTransaction.delete(snapshot.data.documents[index].reference);
+                                  total -= (double.parse(produto.preco));
+                                  //setState(() {
+                                  // total -= (double.parse(produto.preco));
+                                  //});
                                 });
-
-
                               }
-
 
                             )
 
@@ -112,13 +119,13 @@ class _CartState extends State<Cart> {
           }
       ),
 
-      bottomNavigationBar: new Container(
+      bottomNavigationBar: Container(
         color: Colors.white,
         child: Row(
           children: <Widget>[
             Expanded(child: ListTile(
               title: new Text("Total: "),
-              //subtitle: new Text("R\$" + _soma.toString()),
+              subtitle: new Text("R\$" + total.toString()),
             )),
 
             Expanded(

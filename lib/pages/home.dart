@@ -200,7 +200,7 @@ class _HomeState extends State<Home> {
 
       ),
 
-      bottomNavigationBar: MenuInferior(),
+      bottomNavigationBar: MenuInferior(soma: soma),
 
     );
   }

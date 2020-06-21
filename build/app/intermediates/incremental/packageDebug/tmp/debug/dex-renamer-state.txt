@@ -1,4 +1,4 @@
-#Fri Jun 19 23:16:00 BRT 2020
+#Sun Jun 21 03:28:31 BRT 2020
 base.2=C\:\\Users\\samuk_000\\AndroidStudioProjects\\projeto_app_mobile\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
 base.1=C\:\\Users\\samuk_000\\AndroidStudioProjects\\projeto_app_mobile\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 base.0=C\:\\Users\\samuk_000\\AndroidStudioProjects\\projeto_app_mobile\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex

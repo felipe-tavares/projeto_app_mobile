@@ -1,7 +1,5 @@
-import 'package:baitadelivery/components/menu_inferior.dart';
 import 'package:flutter/material.dart';
 import '../pages/buy.dart';
-import '../pages/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../model/Produto.dart';
@@ -14,7 +12,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   Firestore db = Firestore.instance;
   String user;
-  num _soma = 0;//valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
+  //num _soma = 0;//valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
   //var myDouble = double.parse('123.45');
   //var myInt = int.parse('12345');
   String _getUser() {
@@ -23,7 +21,7 @@ class _CartState extends State<Cart> {
         user = currentUser.uid,
       }
     });
-    print("USER:: "+user);
+    print("USERID: "+user);
     return user;
   }
 
@@ -41,7 +39,7 @@ class _CartState extends State<Cart> {
             onPressed: (){/*showSearch(context: context, delegate:  ProductSearch));*/},
           )],
       ),
-
+/*
       //nesta tela falta atualizar o valor total
       body: StreamBuilder(
           stream: db.collection(_getUser()).document("produtos").collection("produtos").snapshots(),
@@ -50,10 +48,20 @@ class _CartState extends State<Cart> {
           builder: (context, snapshot) {
             switch( snapshot.connectionState ){
               case ConnectionState.none :
-
               case ConnectionState.done :
+              case ConnectionState.waiting :
+                return Center(
+                  child: Column(
+                    children: <Widget>[
+                      Text("Carregando produtos..."),
+                      CircularProgressIndicator()
+                    ],
+                  ),
+                );
+                break;
 
               case ConnectionState.active :
+
                 QuerySnapshot querySnapshot = snapshot.data;
 
                 if(snapshot.hasError){
@@ -71,7 +79,7 @@ class _CartState extends State<Cart> {
                           List<DocumentSnapshot> produtos = querySnapshot.documents.toList();
                           DocumentSnapshot dados = produtos[index];
 
-                          Produto produto = Produto(dados["nome"], dados["imagem"], dados["marca"], dados["preco"], dados["quantidade"], dados["volume"], dados["quantidade"]);
+                          Produto produto = Produto(dados["nome"], dados["imagem"], dados["marca"], dados["mercado"], dados["preco"], dados["volume"], dados["quantidade"]);
 
                           return ListTile(
                             leading: CircleAvatar(
@@ -85,19 +93,9 @@ class _CartState extends State<Cart> {
                   );
                 }
                 break;
-              case ConnectionState.waiting :
-                return Center(
-                  child: Column(
-                    children: <Widget>[
-                      Text("Carregando produtos..."),
-                      CircularProgressIndicator()
-                    ],
-                  ),
-                );
-                break;
             }
           }
-      ),
+      ),*/
 
       bottomNavigationBar: new Container(
         color: Colors.white,
@@ -105,7 +103,7 @@ class _CartState extends State<Cart> {
           children: <Widget>[
             Expanded(child: ListTile(
               title: new Text("Total: "),
-              subtitle: new Text("R\$" + _soma.toString()),
+              //subtitle: new Text("R\$" + _soma.toString()),
             )),
 
             Expanded(

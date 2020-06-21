@@ -1,7 +1,5 @@
 import 'package:baitadelivery/pages/cart_page.dart';
 import 'package:baitadelivery/pages/perfil.dart';
-
-
 import 'package:flutter/material.dart';
 
 class MenuInferior extends StatelessWidget {
@@ -41,7 +39,7 @@ class MenuInferior extends StatelessWidget {
                 icon: Icon(Icons.shopping_cart),
                 tooltip: ("Meu Carrinho"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart()));
                 },
             ),
           ],

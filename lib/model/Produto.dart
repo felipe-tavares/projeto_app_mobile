@@ -7,7 +7,7 @@ class Produto{
   String _volume;
   num _quantidade;
 
-  Produto(this._nome, this._imagem, this._marca, this._preco, this._mercado,
+  Produto(this._nome, this._imagem, this._marca, this._mercado, this._preco,
       this._volume, this._quantidade);
 
   num get quantidade => _quantidade;

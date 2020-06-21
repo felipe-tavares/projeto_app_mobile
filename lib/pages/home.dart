@@ -17,15 +17,57 @@ class _HomeState extends State<Home> {
   String _imagemController = "";
   String _marcaController = "";
   String _precoController = "";
+  String _mercadoController = "";
+  String _volumeController = "";
   num _counterController = 0;
   num soma = 0;
   //enviar soma ao cart.... alternativas: criar classe so pra isso, ou adicionar na database e ler de la
+
+  _validacao() {
+    String nome = _nomeController;
+    String imagem = _imagemController;
+    String marca = _marcaController;
+    String preco = _precoController;
+    String mercado = _mercadoController;
+    String volume = _volumeController;
+    num quantidade = _counterController;
+
+    if (nome.isNotEmpty && imagem.isNotEmpty && marca.isNotEmpty && preco.isNotEmpty && mercado.isNotEmpty && volume.isNotEmpty && !(quantidade.isNaN)) {
+      _addcart();
+    }
+    else {
+      print("Esta faltando");
+      if(nome.isEmpty){
+        print(" Nome!");
+      }
+      if(imagem.isEmpty){
+        print(" Imagem!");
+      }
+      if(marca.isEmpty){
+        print(" Marca!");
+      }
+      if(preco.isEmpty){
+        print(" Preco!");
+      }
+      if(mercado.isEmpty){
+        print(" Mercado!");
+      }
+      if(volume.isEmpty){
+        print(" Volume!");
+      }
+      if(quantidade.isNaN){
+        print(" Quantidade!");
+      }
+    }
+  }
 
   Future _addcart() async {
     String nome = _nomeController;
     String imagem = _imagemController;
     String marca = _marcaController;
     String preco = _precoController;
+    String mercado = _mercadoController;
+    String volume = _volumeController;
     num quantidade = _counterController;
 
     String new_product;
@@ -45,7 +87,9 @@ class _HomeState extends State<Home> {
       "nome": nome,
       "imagem": imagem,
       "marca": marca,
+      "mercado": mercado,
       "preco": preco,
+      "volume": volume,
       "quantidade": quantidade,
     }).then((value){
       new_product = value.documentID;
@@ -107,7 +151,7 @@ class _HomeState extends State<Home> {
                             List<DocumentSnapshot> produtos = querySnapshot.documents.toList();
                             DocumentSnapshot dados = produtos[index];
 
-                            Produto produto = Produto(dados["nome"], dados["imagem"], dados["marca"], dados["preco"], dados["mercado"], dados["volume"], dados["quantidade"]);
+                            Produto produto = Produto(dados["nome"], dados["imagem"], dados["marca"], dados["mercado"], dados["preco"], dados["volume"], dados["quantidade"]);
 
                             return ListTile(
                               leading: CircleAvatar(
@@ -116,17 +160,19 @@ class _HomeState extends State<Home> {
                               title: Text( produto.nome ),
                               subtitle: Text( produto.marca + ", R\$ " + produto.preco),
                               trailing: IconButton(icon: Icon(Icons.plus_one),
-                                  onPressed: () {//counter?
+                                  onPressed: () {//bolar algum esquema pra usar a quantidade do produto efetivamente, sem repeti-lo no carrinho
 
                                     setState(() {
                                       _nomeController = produto.nome;
                                       _imagemController = produto.imagem;
-                                      _marcaController = produto.imagem;
+                                      _marcaController = produto.marca;
                                       _precoController = produto.preco;
+                                      _mercadoController = produto.mercado;
+                                      _volumeController = produto.volume;
                                       _counterController += 1;
                                       soma += (double.parse(produto.preco));
                                     });
-                                    _addcart();
+                                    _validacao();
 
                                     setState(() {
                                       _counterController = 0;

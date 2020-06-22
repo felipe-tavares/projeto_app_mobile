@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import '../pages/end.dart';
 
 class Buy extends StatefulWidget {
+  final num tot;
+
+  const Buy({Key key, this.tot}) : super(key: key);
+
   @override
   _BuyState createState() => _BuyState();
 }
 
 class _BuyState extends State<Buy> {
+  num value = 0;
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      value = widget.tot;
+    });
     return Scaffold(
         appBar: AppBar(
           title: Text("Minha Compra"),
@@ -70,7 +78,7 @@ class _BuyState extends State<Buy> {
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
                 color: Colors.grey[500],//valor somado dos itens adicionados à lista do cliente
-                child: const Text('Total: R\$', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
+                child: new Text('Total: R\$$value', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
             ),
           ],
         ),

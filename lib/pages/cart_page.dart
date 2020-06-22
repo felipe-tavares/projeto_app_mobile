@@ -20,16 +20,16 @@ class _CartState extends State<Cart> {
   Firestore db = Firestore.instance;
   num total = 0;
   bool passou = false;
-  String _getUser() {
-    String user = "3Sef58VOM0gRQ9TlBEK89HAxBOq1";
-    /*FirebaseAuth.instance.currentUser().then((currentUser) => {
-      if(currentUser != null) {
-        user = currentUser.uid,
-      }else{
-        user = "4 some reason, there is no currentUser",
-      }
-    });*/
-    return user;
+  String _userID = "";
+  
+  Future _getUser() async {
+    //String user = "3Sef58VOM0gRQ9TlBEK89HAxBOq1";
+	FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+	setState((){
+		_userID = currentUser.uid;
+	});
+    print("USER::" +_userID);
+    //return user;
   }
 
   void atualizaTotal(value){
@@ -38,6 +38,12 @@ class _CartState extends State<Cart> {
       print("quando subtrai");
       print(total);//ta subtraindo mas n ta mudando la em baixo
     });
+  }
+  
+  @override
+  void initState() {
+	  _getUser();
+	  super.initState();
   }
 
   @override
@@ -74,8 +80,46 @@ class _CartState extends State<Cart> {
       ),
 
       //nesta tela falta atualizar o valor total
-      body: StreamBuilder(
-          stream: db.collection(_getUser()).document("produtos").collection("produtos").snapshots(),
+      body: _loadBody(),
+
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Row(
+          children: <Widget>[
+            Expanded(
+                child: ListTile(
+                  title: new Text("Total: "),
+                  subtitle: new Text("R\$$total"),
+            )),
+
+            Expanded(
+              child: new MaterialButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy())); },
+              child: new Text("Check Out", style: TextStyle(color: Colors.black),),
+              color: Colors.grey,
+              )
+            )
+          ],
+        )
+      ),
+    );
+  }
+  
+  _loadBody() {
+	  return _userID == ""
+		? Center(
+			child: Column(
+                    children: <Widget>[
+                      Text("Carregando produtos..."),
+                      CircularProgressIndicator()
+                    ],
+                  ),
+		)
+		: _body();
+  }
+  
+  _body() {
+	  return StreamBuilder(
+          stream: db.collection(_userID).document("produtos").collection("produtos").snapshots(),
 
           //ignore: missing_return
           builder: (context, snapshot) {
@@ -140,27 +184,6 @@ class _CartState extends State<Cart> {
                 break;
             }
           }
-      ),
-
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-                child: ListTile(
-                  title: new Text("Total: "),
-                  subtitle: new Text("R\$$total"),
-            )),
-
-            Expanded(
-              child: new MaterialButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy())); },
-              child: new Text("Check Out", style: TextStyle(color: Colors.black),),
-              color: Colors.grey,
-              )
-            )
-          ],
-        )
-      ),
-    );
+      );
   }
 }

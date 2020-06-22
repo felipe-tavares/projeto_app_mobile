@@ -66,6 +66,25 @@ class _LoginState extends State<Login> {
       });
     }
   }
+  
+  Future _UserLogado() async {
+	  FirebaseAuth auth = FirebaseAuth.instance;
+	  FirebaseUser userlogado = await auth.currentUser();
+	  
+	  if(userlogado != null) {
+		  Navigator.pushAndRemoveUntil(
+			context,
+			MaterialPageRoute(builder: (context) => Home()),
+				(Route<dynamic> route) => false,
+		  );
+	  }
+  }
+  
+  @override
+  void initState() {
+	  _UserLogado();
+	  super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

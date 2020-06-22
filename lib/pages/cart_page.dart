@@ -3,6 +3,7 @@ import '../pages/buy.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../model/Produto.dart';
+import 'package:intl/intl.dart';
 
 class Cart extends StatefulWidget {
   final num soma;
@@ -35,6 +36,9 @@ class _CartState extends State<Cart> {
   void atualizaTotal(value){
     setState(() {
       total -= value;
+      if(total<=0) total = 0;
+      if(total<100) total = num.parse(total.toStringAsPrecision(4));
+      else if(total>100) total = num.parse(total.toStringAsPrecision(5));
       print("quando subtrai");
       print(total);//ta subtraindo mas n ta mudando la em baixo
     });
@@ -51,6 +55,8 @@ class _CartState extends State<Cart> {
     if(passou == false){
       setState(() {
         total = widget.soma;
+        if(total<100) total = num.parse(total.toStringAsPrecision(4));
+        else if(total>100) total = num.parse(total.toStringAsPrecision(5));
         print("quando incia");
         print(total);//sera q ta resetando o valor aki?
       });

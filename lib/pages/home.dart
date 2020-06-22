@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../model/Produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:baitadelivery/pages/cart_page.dart';
+import 'package:baitadelivery/pages/perfil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
@@ -200,9 +202,63 @@ class _HomeState extends State<Home> {
 
       ),
 
-      bottomNavigationBar: MenuInferior(soma: soma),
+      bottomNavigationBar: BottomAppBar(
+        //shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+            children: <Widget>[
+              IconButton(
+                  padding: EdgeInsets.only(right: 20.0, left: 20.0),
+                  color: Colors.blue,
+                  icon: Icon(Icons.home),
+                  tooltip: ("Home"),
+                  onPressed: () {/* */}
+              ),
+
+              IconButton(
+                padding: EdgeInsets.only(right: 50.0, left: 50.0),
+                color: Colors.blue,
+                icon: Icon(Icons.person),
+                tooltip: ("Perfil"),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Perfil()));
+                },
+              ),
+
+              IconButton(
+                padding: EdgeInsets.only(right: 30.0, left: 30.0),
+                color: Colors.blue,
+                icon: Icon(Icons.shopping_cart),
+                tooltip: ("Meu Carrinho"),
+                onPressed: () {
+                  _awaitReturnValueFromSecondScreen(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
 
     );
+  }
+
+  void _awaitReturnValueFromSecondScreen(BuildContext context) async {
+
+    // start the SecondScreen and wait for it to finish with a result
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Cart(soma: soma),
+        ));
+
+    // after the SecondScreen result comes back update the Text widget with it
+    setState(() {
+      soma = result;
+    });
   }
 
   }

@@ -3,9 +3,6 @@ import 'package:baitadelivery/pages/perfil.dart';
 import 'package:flutter/material.dart';
 
 class MenuInferior extends StatelessWidget {
-  final num soma;
-
-  const MenuInferior({Key key, this.soma}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +39,7 @@ class MenuInferior extends StatelessWidget {
                 icon: Icon(Icons.shopping_cart),
                 tooltip: ("Meu Carrinho"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart(soma: soma)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
                 },
             ),
           ],

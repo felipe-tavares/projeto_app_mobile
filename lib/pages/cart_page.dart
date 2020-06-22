@@ -12,13 +12,14 @@ class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
-
+//cada vez q entra aki, recebe valor
+//quando remove e volta, ele reseta oq tava antes de chegar
+//alternativa 1: salvar esse dado numa db e se basear nela ao invez de passagem de parametro
+//alternativa 2: enviar o valor atual ao voltar
 class _CartState extends State<Cart> {
-  num total = 0;
   Firestore db = Firestore.instance;
-  //valor total da compra, sera atualizada conforme a listagem de produtos (e quantidade) no carrinho do usuario
-  //var myDouble = double.parse('123.45');
-  //var myInt = int.parse('12345');
+  num total = 0;
+  bool passou = false;
   String _getUser() {
     String user = "3Sef58VOM0gRQ9TlBEK89HAxBOq1";
     /*FirebaseAuth.instance.currentUser().then((currentUser) => {
@@ -31,11 +32,36 @@ class _CartState extends State<Cart> {
     return user;
   }
 
+  void atualizaTotal(value){
+    setState(() {
+      total -= value;
+      print("quando subtrai");
+      print(total);//ta subtraindo mas n ta mudando la em baixo
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    total = widget.soma;
+    if(passou == false){
+      setState(() {
+        total = widget.soma;
+        print("quando incia");
+        print(total);//sera q ta resetando o valor aki?
+      });
+      passou = true;
+    }
+
     return Scaffold(
       appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () { Navigator.pop(context, total); },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
         title: Text("Meu Carrinho"),
         actions: <Widget>[
           IconButton(
@@ -97,14 +123,11 @@ class _CartState extends State<Cart> {
                             trailing: IconButton(icon: Icon(Icons.remove_circle),
                               color: Colors.red,
                               onPressed: (){
+                                  atualizaTotal(double.parse(produto.preco));
 
                                   Firestore.instance.runTransaction((Transaction myTransaction) async {
-                                  await myTransaction.delete(snapshot.data.documents[index].reference);
-                                  total -= (double.parse(produto.preco));
-                                  //setState(() {
-                                  // total -= (double.parse(produto.preco));
-                                  //});
-                                });
+                                    await myTransaction.delete(snapshot.data.documents[index].reference);
+                                  });
                               }
 
                             )
@@ -123,9 +146,10 @@ class _CartState extends State<Cart> {
         color: Colors.white,
         child: Row(
           children: <Widget>[
-            Expanded(child: ListTile(
-              title: new Text("Total: "),
-              subtitle: new Text("R\$" + total.toString()),
+            Expanded(
+                child: ListTile(
+                  title: new Text("Total: "),
+                  subtitle: new Text("R\$$total"),
             )),
 
             Expanded(

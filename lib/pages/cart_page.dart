@@ -13,10 +13,7 @@ class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
-//cada vez q entra aki, recebe valor
-//quando remove e volta, ele reseta oq tava antes de chegar
-//alternativa 1: salvar esse dado numa db e se basear nela ao invez de passagem de parametro
-//alternativa 2: enviar o valor atual ao voltar
+
 class _CartState extends State<Cart> {
   Firestore db = Firestore.instance;
   num total = 0;
@@ -24,13 +21,11 @@ class _CartState extends State<Cart> {
   String _userID = "";
   
   Future _getUser() async {
-    //String user = "3Sef58VOM0gRQ9TlBEK89HAxBOq1";
-	FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
-	setState((){
-		_userID = currentUser.uid;
-	});
+    FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
+    setState((){
+      _userID = currentUser.uid;
+    });
     print("USER::" +_userID);
-    //return user;
   }
 
   void atualizaTotal(value){
@@ -99,7 +94,7 @@ class _CartState extends State<Cart> {
             )),
 
             Expanded(
-              child: new MaterialButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy())); },
+              child: new MaterialButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy(tot: total))); },
               child: new Text("Check Out", style: TextStyle(color: Colors.black),),
               color: Colors.grey,
               )

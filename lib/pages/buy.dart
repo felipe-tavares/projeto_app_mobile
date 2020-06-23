@@ -51,9 +51,14 @@ class _BuyState extends State<Buy> {
         body: ListView(
           children: <Widget>[
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
               margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3, top: 5),
               height: 50,
-              color: Colors.grey[500],//nome do individuo
                 child: Column(
                     children: <Widget>[
                       TextField(
@@ -68,83 +73,118 @@ class _BuyState extends State<Buy> {
                 )
             ),
             Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                color: Colors.blue[500],
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(20))
+              ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//rua do individuo
                 child: Column(
                   children: <Widget>[
-                    const Text('Rua', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                    Text(_ruaController)
+                    const Text('Rua', style: TextStyle(color: Colors.black, fontSize: 18)),
+                    Text(_ruaController, style: TextStyle(color: Colors.black, fontSize: 20))
                   ]
                 )
             ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//numero da casa do individuo
                 child: Column(
                     children: <Widget>[
-                      const Text('Número', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                      Text(_numeroController)
+                      const Text('Número', style: TextStyle(color: Colors.black, fontSize: 18)),
+                      Text(_numeroController, style: TextStyle(color: Colors.black, fontSize: 20))
                     ],
               )
             ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//bairro do individuo
                 child: Column(
                   children: <Widget>[
-                    const Text('Bairro', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                    Text(_bairroController)
+                    const Text('Bairro', style: TextStyle(color: Colors.black, fontSize: 18)),
+                    Text(_bairroController, style: TextStyle(color: Colors.black, fontSize: 20))
                   ],
                 )
             ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//cidade do individuo
                 child: Column(
                     children: <Widget>[
-                      const Text('Cidade', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                      Text(_cidadeController)
+                      const Text('Cidade', style: TextStyle(color: Colors.black, fontSize: 18)),
+                      Text(_cidadeController, style: TextStyle(color: Colors.black, fontSize: 20))
                     ]
                 )
             ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//CEP do individuo
                 child: Column(
                     children: <Widget>[
-                      const Text('CEP', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                      Text(_cepController)
+                      const Text('CEP', style: TextStyle(color: Colors.black, fontSize: 18)),
+                      Text(_cepController, style: TextStyle(color: Colors.black, fontSize: 20))
                     ]
                 )
             ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//estado do individuo
                 child: Column(
                     children: <Widget>[
-                    const Text('Estado', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
-                    Text(_estadoController)
+                    const Text('Estado', style: TextStyle(color: Colors.black, fontSize: 18)),
+                    Text(_estadoController, style: TextStyle(color: Colors.black, fontSize: 20))
                   ]
                 )
               ),
             Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 117,
-                color: Colors.grey[500],//select : Dinheiro, cartao...
                 child: Column(
                   children: <Widget>[
-                  const Text('Método de pagamento', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,),
+                  const Text('Método de pagamento', style: TextStyle(color: Colors.black, fontSize: 18)),
                     DropdownButton<String>(
                         items : _metodos.map((String dropDownStringItem) {
                           return DropdownMenuItem<String>(
                             value: dropDownStringItem,
-                            child: Text(dropDownStringItem),
+                            child: Text(dropDownStringItem, style: TextStyle(color: Colors.black, fontSize: 20)),
                           );
                         }).toList(),
                         onChanged: ( String novoItemSelecionado) {
@@ -156,7 +196,7 @@ class _BuyState extends State<Buy> {
                         value: _metodoSelecionado
                     ),
                 Text("O método $_metodoSelecionado foi selecionado",
-                    style: TextStyle(fontSize: 20.0), textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18), textAlign: TextAlign.center,
                 )
                   ]
                 )
@@ -165,11 +205,16 @@ class _BuyState extends State<Buy> {
             SizedBox(height: 24),
             Clock24Example(),
             SizedBox(height: 24),
-            Container(
+            Container( //Total da compra
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.blue[500],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
-                color: Colors.grey[500],//valor somado dos itens adicionados à lista do cliente
-                child: new Text('Total: R\$$value', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
+                child: new Text('Total: R\$$value', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.center,)
             ),
             Padding(padding: EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Text(
@@ -186,14 +231,22 @@ class _BuyState extends State<Buy> {
           child: Row(
               children: <Widget>[
                   Expanded(
+                    child: Material(  //Wrap with Material
+                    shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+                    color: Colors.yellow,
+                    clipBehavior: Clip.antiAlias, // Add This
                     child: new MaterialButton(//puxa endereço de locator.dart e seta nos containeres acima (mantem na tela)
                         onPressed: (){ _getCurrentLocation();},
-                        child: new Text("Atualizar endereco", style: TextStyle(color: Colors.black),),
-                        color: Colors.yellow,
+                        child: new Text("Atualizar endereço", style: TextStyle(color: Colors.black),),
                     )
+          ),
                   ),
 
                 Expanded(
+                  child: Material(  //Wrap with Material
+                  shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+                  color: Colors.amber[100],
+                  clipBehavior: Clip.antiAlias, // Add This
                   child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
                     onPressed: (){
                       if(_nomeController.toString().isNotEmpty && _ruaController.isNotEmpty && _cidadeController.isNotEmpty && setime && setdat){
@@ -205,8 +258,8 @@ class _BuyState extends State<Buy> {
                       }
                     },
                     child: new Text("Check Out", style: TextStyle(color: Colors.black),),
-                    color: Colors.amber[100],
                   )
+                ),
                 )
             ],
         )
@@ -240,8 +293,8 @@ class _BuyState extends State<Buy> {
         "${place.thoroughfare}, ${place.name}, ${place.subLocality}, ${place.subAdministrativeArea} - ${place.administrativeArea}, ${place.postalCode}, ${place.country}";
 
         setState(() {
-          _numeroController = place.name;
           _ruaController = place.thoroughfare;
+          _numeroController = place.name;
           _cidadeController = place.subAdministrativeArea;
           _estadoController = place.administrativeArea;
           _bairroController = place.subLocality;

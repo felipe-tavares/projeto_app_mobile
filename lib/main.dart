@@ -10,6 +10,7 @@ void main() {
           title: 'Flutter Demo',
           theme: ThemeData(
             primarySwatch: Colors.blue,
+            hintColor: Colors.black,
           ),
           localizationsDelegates: [
             // ... app-specific localization delegate[s] here

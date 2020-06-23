@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
     }).catchError((error){
       print("Error from Firebase: "+error.toString());
       setState(() {
-        _erroMsg = "Error on login!";
+        _erroMsg = "Erro no login!";
       });
     });
   }
@@ -43,11 +43,11 @@ class _LoginState extends State<Login> {
     if(email.isNotEmpty || senha.isNotEmpty){
       if(!email.contains("@")){
         setState(() {
-          _erroMsg = "Inform a valid email!";
+          _erroMsg = "Informe email válido!";
         });
       }else if(senha.length < 8){
         setState(() {
-          _erroMsg = "Password must contain at least 8 characters!";
+          _erroMsg = "Senha deve conter ao menos 8 caracteres!";
         });
       }else{
         setState(() {
@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
       }
     }else{
       setState(() {
-        _erroMsg = "Fill in all the data fields!";
+        _erroMsg = "Preencha todos os campos!";
       });
     }
   }
@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                     fillColor: Colors.white,
 
                     alignLabelWithHint: true,
-                    labelText: 'Password'
+                    labelText: 'Senha'
                 ),
                 controller: _senhaController,
                 keyboardType: TextInputType.visiblePassword,
@@ -194,7 +194,7 @@ class _LoginState extends State<Login> {
                           borderRadius: new BorderRadius.circular(18.0),
                           side: BorderSide(color: Colors.white),
                         ),
-                        child: Text('SIGN UP',
+                        child: Text('CADASTRO',
                           style: TextStyle(
                             fontFamily: 'Oswald',
                             color: Colors.white,
@@ -213,7 +213,7 @@ class _LoginState extends State<Login> {
             ),
 
             OutlineButton(
-              child: Text('I forgot my password',
+              child: Text('Esqueci minha senha',
                 style: TextStyle(
                     fontFamily: 'Oswald',
                     color: Colors.white
@@ -230,7 +230,7 @@ class _LoginState extends State<Login> {
                     alignment: FractionalOffset.bottomRight,
                     child: Container(
                         child: Text(
-                          "Go market \nat home.",
+                          "Va ao mercado \nsem sair de casa.",
                           textAlign: TextAlign.right,
 
                           style: TextStyle(

@@ -107,7 +107,7 @@ class _CartState extends State<Cart> {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy(tot: total)));
                 } else{
                   setState(() {
-                    _erroMsg = "Select an item to proceed";
+                    _erroMsg = "Selecione um item para prosseguir";
                   });
                 }
               },
@@ -115,25 +115,6 @@ class _CartState extends State<Cart> {
               )
               )
             )
-            /*Expanded(
-                  child: Material(  //Wrap with Material
-                  shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
-                  color: Colors.redAccent,
-                  clipBehavior: Clip.antiAlias, // Add This
-                  child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
-                    onPressed: (){
-                      if(_nomeController.toString().isNotEmpty && _ruaController.isNotEmpty && _cidadeController.isNotEmpty && setime && setdat){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer(time: DateTimeField.combine(dia, hora).toString())));
-                      }else{
-                        setState(() {
-                        _erroMsg = "Insira seus dados!";
-                        });
-                      }
-                    },
-                    child: new Text("Check Out", style: TextStyle(color: Colors.black),),
-                  )
-                ),
-                )*/
           ],
         )
       ),

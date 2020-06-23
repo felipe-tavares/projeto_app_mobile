@@ -401,21 +401,3 @@ class Clock24Example extends StatelessWidget {
     ]);
   }
 }
-/*
-Container(
-    decoration: BoxDecoration(
-      border: Border.all(
-      color: Colors.blue[500],
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(20))
-    ),
-      margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
-      height: 50,
-      child: Column(
-        children: <Widget>[
-
-        ]
-      )
-  ),
-
- */

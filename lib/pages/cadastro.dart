@@ -30,7 +30,7 @@ class _CadastroState extends State<Cadastro> {
     }).catchError((error){
       print("Error from Firebase: "+error.toString());
       setState(() {
-        _erroMsg = "Error on user register. Confirm your name and password!";
+        _erroMsg = "Erro ao resgistrar. Confirme email e senha!";
       });
     });
 
@@ -44,11 +44,11 @@ class _CadastroState extends State<Cadastro> {
     if(nome.isNotEmpty || email.isNotEmpty || senha.isNotEmpty){
       if(!email.contains("@")){
         setState(() {
-          _erroMsg = "Inform a valid email!";
+          _erroMsg = "Informe um email válido!";
         });
       }else if(senha.length < 8){
         setState(() {
-          _erroMsg = "Password must contain at least 8 characters!";
+          _erroMsg = "Senha deve conter ao menos 8 caracteres!";
         });
       }else{
         setState(() {
@@ -64,7 +64,7 @@ class _CadastroState extends State<Cadastro> {
       }
     }else{
       setState(() {
-        _erroMsg = "Fill in all the data fields!";
+        _erroMsg = "Preencha todos os campos!";
       });
     }
   }
@@ -103,7 +103,7 @@ class _CadastroState extends State<Cadastro> {
                     filled: true,
                     fillColor: Colors.white,
                     alignLabelWithHint: true,
-                    hintText: 'Name',
+                    hintText: 'Nome',
                   ),
                   controller: _nomeController,
                 ),
@@ -147,7 +147,7 @@ class _CadastroState extends State<Cadastro> {
                     fillColor: Colors.white,
 
                     alignLabelWithHint: true,
-                    labelText: 'Password',
+                    labelText: 'Senha',
                   ),
                   controller: _senhaController,
                   keyboardType: TextInputType.text,
@@ -173,7 +173,7 @@ class _CadastroState extends State<Cadastro> {
                             borderRadius: new BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.white)
                         ),
-                        child: Text('REGISTER',
+                        child: Text('REGISTRAR',
                           style: TextStyle(
                               fontFamily: 'Oswald',
                               color: Colors.white
@@ -192,7 +192,7 @@ class _CadastroState extends State<Cadastro> {
                             borderRadius: new BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.white)
                         ),
-                        child: Text('BACK',
+                        child: Text('VOLTAR',
                           style: TextStyle(
                               fontFamily: 'Oswald',
                               color: Colors.white

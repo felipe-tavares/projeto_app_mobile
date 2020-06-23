@@ -95,7 +95,7 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
                     alignment: FractionalOffset.topCenter,
                     child: Container(
                         child: Text(
-                          "PURCHASE \nSUCCESS!",
+                          "COMPRA \nBEM SUCEDIDA!",
                           textAlign: TextAlign.left,
 
                           style: TextStyle(
@@ -136,7 +136,7 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Deliver Time:",
+                              "Tempo de entrega:",
                               style: TextStyle(
                                 fontFamily: 'Oswald',
                                 fontSize: 15,

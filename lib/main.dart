@@ -1,3 +1,4 @@
+import 'package:baitadelivery/pages/cadastro.dart';
 import 'package:baitadelivery/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

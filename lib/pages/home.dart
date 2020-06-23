@@ -1,4 +1,3 @@
-import 'package:baitadelivery/components/menu_inferior.dart';
 import 'package:flutter/material.dart';
 import '../model/Produto.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,7 +22,6 @@ class _HomeState extends State<Home> {
   String _volumeController = "";
   num _counterController = 0;
   num soma = 0;
-  //enviar soma ao cart.... alternativas: criar classe so pra isso, ou adicionar na database e ler de la
 
   _validacao() {
     String nome = _nomeController;

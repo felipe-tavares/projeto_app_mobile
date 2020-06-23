@@ -19,11 +19,13 @@ class _BuyState extends State<Buy> {
 
   Position _currentPosition;
   String _currentAddress;
+  String _erroMsg = "";
 
   String nomeMetodo="";
   var _metodos =['Dinheiro','Cartão','Transferência'];
   var _metodoSelecionado = 'Dinheiro';
 
+  TextEditingController _nomeController = TextEditingController();
   String _ruaController = "";
   String _numeroController = "";
   String _cidadeController = "";
@@ -52,7 +54,18 @@ class _BuyState extends State<Buy> {
               margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3, top: 5),
               height: 50,
               color: Colors.grey[500],//nome do individuo
-              child: const Text('Nome', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left),
+                child: Column(
+                    children: <Widget>[
+                      TextField(
+                        textAlign: TextAlign.center,
+                        controller: _nomeController,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Nome',
+                        ),
+                      )
+                    ]
+                )
             ),
             Container(
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
@@ -158,6 +171,13 @@ class _BuyState extends State<Buy> {
                 color: Colors.grey[500],//valor somado dos itens adicionados à lista do cliente
                 child: new Text('Total: R\$$value', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
             ),
+            Padding(padding: EdgeInsets.only(top: 20, left: 30, right: 30),
+              child: Text(
+                _erroMsg,
+                style: TextStyle(color: Colors.red, fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
 
@@ -175,7 +195,15 @@ class _BuyState extends State<Buy> {
 
                 Expanded(
                   child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
-                    onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer(time: DateTimeField.combine(dia, hora).toString())));  },
+                    onPressed: (){
+                      if(_nomeController.toString().isNotEmpty && _ruaController.isNotEmpty && _cidadeController.isNotEmpty && setime && setdat){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer(time: DateTimeField.combine(dia, hora).toString())));
+                      }else{
+                        setState(() {
+                        _erroMsg = "Insira seus dados!";
+                        });
+                      }
+                    },
                     child: new Text("Check Out", style: TextStyle(color: Colors.black),),
                     color: Colors.amber[100],
                   )
@@ -235,6 +263,8 @@ class _BuyState extends State<Buy> {
 
 TimeOfDay hora;
 DateTime dia;
+bool setime = false;
+bool setdat = false;
 
 class BasicDateField extends StatelessWidget {
   final format = DateFormat("dd-MM-yyyy");
@@ -257,6 +287,7 @@ class BasicDateField extends StatelessWidget {
             ),
           );
           dia = date;
+          setdat = true;
           return date;
         },
       ),
@@ -284,6 +315,7 @@ class Clock24Example extends StatelessWidget {
             ),
           );
           hora = time;
+          setime = true;
           return DateTimeField.convert(time);
         },
       ),

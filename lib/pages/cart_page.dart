@@ -21,6 +21,7 @@ class _CartState extends State<Cart> {
   num total = 0;
   bool passou = false;
   String _userID = "";
+  String _erroMsg = "";
   
   Future _getUser() async {
     FirebaseUser currentUser = await FirebaseAuth.instance.currentUser();
@@ -36,8 +37,8 @@ class _CartState extends State<Cart> {
       if(total<=0) total = 0;
       if(total<100) total = num.parse(total.toStringAsPrecision(4));
       else if(total>100) total = num.parse(total.toStringAsPrecision(5));
-      print("quando subtrai");
-      print(total);//ta subtraindo mas n ta mudando la em baixo
+      //print("quando subtrai");
+      //print(total);
     });
   }
   
@@ -54,8 +55,8 @@ class _CartState extends State<Cart> {
         total = widget.soma;
         if(total<100) total = num.parse(total.toStringAsPrecision(4));
         else if(total>100) total = num.parse(total.toStringAsPrecision(5));
-        print("quando incia");
-        print(total);//sera q ta resetando o valor aki?
+        //print("quando incia");
+        //print(total);
       });
       passou = true;
     }
@@ -96,7 +97,15 @@ class _CartState extends State<Cart> {
             )),
 
             Expanded(
-              child: new MaterialButton(onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy(tot: total))); },
+              child: new MaterialButton(onPressed: (){
+                if(total > 0){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy(tot: total)));
+                } else{
+                  setState(() {
+                    _erroMsg = "Select an item to proceed";
+                  });
+                }
+              },
               child: new Text("Check Out", style: TextStyle(color: Colors.black),),
               color: Colors.grey,
               )
@@ -182,6 +191,7 @@ class _CartState extends State<Cart> {
                           );
                         }
                     ),
+
                   );
                 }
                 break;

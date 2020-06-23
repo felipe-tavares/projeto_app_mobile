@@ -73,6 +73,7 @@ class _CartState extends State<Cart> {
           },
         ),
         title: Text("Meu Carrinho"),
+        backgroundColor: Colors.red,
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -97,6 +98,10 @@ class _CartState extends State<Cart> {
             )),
 
             Expanded(
+              child: Material(  //Wrap with Material
+              shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+              color: Colors.redAccent,
+              clipBehavior: Clip.antiAlias, // Add This
               child: new MaterialButton(onPressed: (){
                 if(total > 0){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=> Buy(tot: total)));
@@ -107,9 +112,28 @@ class _CartState extends State<Cart> {
                 }
               },
               child: new Text("Check Out", style: TextStyle(color: Colors.black),),
-              color: Colors.grey,
+              )
               )
             )
+            /*Expanded(
+                  child: Material(  //Wrap with Material
+                  shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
+                  color: Colors.redAccent,
+                  clipBehavior: Clip.antiAlias, // Add This
+                  child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
+                    onPressed: (){
+                      if(_nomeController.toString().isNotEmpty && _ruaController.isNotEmpty && _cidadeController.isNotEmpty && setime && setdat){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer(time: DateTimeField.combine(dia, hora).toString())));
+                      }else{
+                        setState(() {
+                        _erroMsg = "Insira seus dados!";
+                        });
+                      }
+                    },
+                    child: new Text("Check Out", style: TextStyle(color: Colors.black),),
+                  )
+                ),
+                )*/
           ],
         )
       ),

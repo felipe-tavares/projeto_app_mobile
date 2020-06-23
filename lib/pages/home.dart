@@ -102,6 +102,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
           title: Text("Produtos"),
           actions: <Widget>[
             IconButton(
@@ -202,16 +203,16 @@ class _HomeState extends State<Home> {
 
       bottomNavigationBar: BottomAppBar(
         //shape: const CircularNotchedRectangle(),
+        color: Colors.red,
         child: Container(
           height: 50.0,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: <Widget>[
               IconButton(
                   padding: EdgeInsets.only(right: 20.0, left: 20.0),
-                  color: Colors.blue,
+                  color: Colors.white,
                   icon: Icon(Icons.home),
                   tooltip: ("Home"),
                   onPressed: () {/* */}
@@ -219,7 +220,7 @@ class _HomeState extends State<Home> {
 
               IconButton(
                 padding: EdgeInsets.only(right: 50.0, left: 50.0),
-                color: Colors.blue,
+                color: Colors.white,
                 icon: Icon(Icons.person),
                 tooltip: ("Perfil"),
                 onPressed: () {
@@ -229,7 +230,7 @@ class _HomeState extends State<Home> {
 
               IconButton(
                 padding: EdgeInsets.only(right: 30.0, left: 30.0),
-                color: Colors.blue,
+                color: Colors.white,
                 icon: Icon(Icons.shopping_cart),
                 tooltip: ("Meu Carrinho"),
                 onPressed: () {

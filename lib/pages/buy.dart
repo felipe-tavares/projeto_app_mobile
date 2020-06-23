@@ -44,6 +44,7 @@ class _BuyState extends State<Buy> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Minha Compra"),
+          backgroundColor: Colors.red,
           actions: <Widget>[
           ],
         ),
@@ -51,47 +52,46 @@ class _BuyState extends State<Buy> {
         body: ListView(
           children: <Widget>[
             Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue[500],
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20))
-                ),
               margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3, top: 5),
-              height: 50,
+              height: 90,
                 child: Column(
                     children: <Widget>[
+                      const Text('Nome', style: TextStyle(color: Colors.black, fontSize: 18)),
                       TextField(
+                        cursorColor: Colors.black,
                         textAlign: TextAlign.center,
                         controller: _nomeController,
                         decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Nome',
+                            border: new OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(
+                                const Radius.circular(50.0),
+                              ),
+                            ),
                         ),
                       )
                     ]
                 )
             ),
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                color: Colors.blue[500],
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
                 child: Column(
                   children: <Widget>[
                     const Text('Rua', style: TextStyle(color: Colors.black, fontSize: 18)),
-                    Text(_ruaController, style: TextStyle(color: Colors.black, fontSize: 20))
+                    Text(_ruaController, style: TextStyle(color: Colors.black, fontSize: 20)),
                   ]
                 )
             ),
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -107,7 +107,7 @@ class _BuyState extends State<Buy> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -123,7 +123,7 @@ class _BuyState extends State<Buy> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -139,7 +139,7 @@ class _BuyState extends State<Buy> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -155,7 +155,7 @@ class _BuyState extends State<Buy> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -171,7 +171,7 @@ class _BuyState extends State<Buy> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
@@ -201,19 +201,45 @@ class _BuyState extends State<Buy> {
                   ]
                 )
              ),
-            BasicDateField(),
-            SizedBox(height: 24),
-            Clock24Example(),
-            SizedBox(height: 24),
-            Container( //Total da compra
+            Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.blue[500],
+                      color: Colors.black,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
-                height: 50,
+                height: 80,
+                child: Column(
+                    children: <Widget>[
+                      BasicDateField(),
+                    ]
+                )
+            ),
+            Container(
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
+                height: 80,
+                child: Column(
+                    children: <Widget>[
+                      Clock24Example(),
+                    ]
+                )
+            ),
+            Container( //Total da compra
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20))
+                ),
+                margin: const EdgeInsets.only(top: 5, bottom: 5, left: 3, right: 3),
+                height: 30,
                 child: new Text('Total: R\$$value', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.center,)
             ),
             Padding(padding: EdgeInsets.only(top: 20, left: 30, right: 30),
@@ -233,7 +259,7 @@ class _BuyState extends State<Buy> {
                   Expanded(
                     child: Material(  //Wrap with Material
                     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
-                    color: Colors.yellow,
+                    color: Colors.amberAccent,
                     clipBehavior: Clip.antiAlias, // Add This
                     child: new MaterialButton(//puxa endereço de locator.dart e seta nos containeres acima (mantem na tela)
                         onPressed: (){ _getCurrentLocation();},
@@ -245,7 +271,7 @@ class _BuyState extends State<Buy> {
                 Expanded(
                   child: Material(  //Wrap with Material
                   shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(20.0) ),
-                  color: Colors.amber[100],
+                  color: Colors.redAccent,
                   clipBehavior: Clip.antiAlias, // Add This
                   child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
                     onPressed: (){
@@ -324,7 +350,7 @@ class BasicDateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Text('Data'),
+      Text('Data de entrega'),
       DateTimeField(
         format: format,
         onShowPicker: (context, currentValue) async {
@@ -354,7 +380,7 @@ class Clock24Example extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Text('Hora'),
+      Text('Hora de entrega'),
       DateTimeField(
         format: format,
         onShowPicker: (context, currentValue) async {
@@ -375,3 +401,21 @@ class Clock24Example extends StatelessWidget {
     ]);
   }
 }
+/*
+Container(
+    decoration: BoxDecoration(
+      border: Border.all(
+      color: Colors.blue[500],
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(20))
+    ),
+      margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
+      height: 50,
+      child: Column(
+        children: <Widget>[
+
+        ]
+      )
+  ),
+
+ */

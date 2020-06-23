@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class Timer extends StatefulWidget {
+  final String time;
+
+  const Timer({Key key, this.time}) : super(key: key);
+
   @override
   _TimerState createState() => _TimerState();
 }
@@ -13,30 +17,70 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
 
   String get timerString {
     Duration duration = controller.duration * controller.value;
-    return '${(duration.inHours % 24).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    if(duration.inDays == 0){
+      return '${(duration.inHours % 24).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+    }
+    return '${(duration.inDays % 30).toString().padLeft(3, '0')}, ${(duration.inHours % 24).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
   //
 
   @override
   void initState() {
-    super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 23, minutes: 5, hours: 1),
-    );
-
-    // ..addStatusListener((status) {
-    //     if (controller.status == AnimationStatus.dismissed) {
-    //       setState(() => isPlaying = false);
-    //     }
-
-    //     print(status);
-    //   })
+    String diatual = DateTime.now().toString();
+    String hour = (widget.time).substring(11,13);
+    String minute = (widget.time).substring(14,16);
+    String day = (widget.time).substring(8,10);
+    String month = (widget.time).substring(5,7);
+    String houratual = (diatual).substring(11,13);
+    String minuteatual = (diatual).substring(14,16);
+    String dayatual = (diatual).substring(8,10);
+    String monthatual = (diatual).substring(5,7);
+    //print(month + ' ' + day + ' ' + hour + ' ' + minute);
+    //print(monthatual + ' ' + dayatual + ' ' + houratual + ' ' + minuteatual);
+    //12 meses, 30 dias, 24 horas, 60 minutos
+    //o maior vai ser o time do widget, então, subtrair o atual dele
+    int mes = int.parse(month) - int.parse(monthatual);
+    int dia;
+    int hora;
+    int minuto;
+    //quantidade de dias varia por diferença de mes, a cada mes de diferença, incrementa 30 dias 22/06 10/08 -> 8-6=2, 2-1=1 30+10-22=18, 18+1*30
+    if(int.parse(day) - int.parse(dayatual) < 0){//se dia atual > dia passado, decrementa mes e acrescenta 30 dias (ajustar dps)
+      mes -= 1;
+      dia = (int.parse(day)+30) - int.parse(dayatual);
+    }else{
+      dia = int.parse(day) - int.parse(dayatual);
+    }
+    dia+=mes*30;
+    if(int.parse(hour) - int.parse(houratual) < 0){//se hora negativa, 08 - 20, decrementa dia e acrescenta 24 horas a hora escolhida
+      dia -= 1;
+      hora = (int.parse(hour)+24) - int.parse(houratual);
+    }else{
+      hora = int.parse(hour) - int.parse(houratual);
+    }
+    if(int.parse(minute) - int.parse(minuteatual) < 0){//se minuto negativo, 30 - 55, decrementa hora e acrescenta 60 minutos ao minuto escolhido
+      hora -= 1;
+      minuto = (int.parse(minute)+60) - int.parse(minuteatual);
+    }else{
+      minuto = int.parse(minute) - int.parse(minuteatual);
+    }
+    if(mes.isNegative || dia.isNegative || hora.isNegative || minuto.isNegative){
+      print("Data invalida!");
+    }else{
+      super.initState();
+      controller = AnimationController(
+        vsync: this,
+        duration: Duration(seconds: 59, minutes: minuto, hours: hora, days: dia),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
+    //ThemeData themeData = Theme.of(context);
+    controller.reverse(
+        from: controller.value == 0.0
+            ? 1.0
+            : controller.value);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(
@@ -104,9 +148,10 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
                                 builder: (BuildContext context, Widget child) {
                                   return Text(
                                     timerString,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontFamily: 'Oswald',
-                                      fontSize: 50,
+                                      fontSize: 40,
                                       color: Colors.white,
                                     ),
                                   );
@@ -120,38 +165,7 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
               ),
             ),
             Container(
-              margin: EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FloatingActionButton(
-                    child: AnimatedBuilder(
-                      animation: controller,
-                      builder: (BuildContext context, Widget child) {
-                        return Icon(controller.isAnimating
-                            ? Icons.pause
-                            : Icons.play_arrow);
-
-                        // Icon(isPlaying
-                        // ? Icons.pause
-                        // : Icons.play_arrow);
-                      },
-                    ),
-                    onPressed: () {
-                      // setState(() => isPlaying = !isPlaying);
-
-                      if (controller.isAnimating) {
-                        controller.stop(canceled: true);
-                      } else {
-                        controller.reverse(
-                            from: controller.value == 0.0
-                                ? 1.0
-                                : controller.value);
-                      }
-                    },
-                  )
-                ],
-              ),
+              margin: EdgeInsets.all(20.0),
             )
           ],
         ),

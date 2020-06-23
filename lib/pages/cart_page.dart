@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../model/Produto.dart';
 import 'package:intl/intl.dart';
 
+//edit: temq limpar a página do carrinho (tirar os itens) antes de reiniciar o app
+
 class Cart extends StatefulWidget {
   final num soma;
 

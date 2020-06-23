@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../pages/end.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
 class Buy extends StatefulWidget {
   final num tot;
@@ -145,18 +148,10 @@ class _BuyState extends State<Buy> {
                   ]
                 )
              ),
-            Container(
-                margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
-                height: 50,
-                color: Colors.grey[500],//data a ser entregue, formato DD/MM
-                child: const Text('Data', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
-            ),
-            Container(
-                margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
-                height: 50,
-                color: Colors.grey[500],//Hora a ser entregue, formato HH:MM:SS (essa hora é enviada como paramentro para a próxima tela)
-                child: const Text('Hora', style: TextStyle(color: Colors.black, fontSize: 20), textAlign: TextAlign.left,)
-            ),
+            BasicDateField(),
+            SizedBox(height: 24),
+            Clock24Example(),
+            SizedBox(height: 24),
             Container(
                 margin: const EdgeInsets.only(bottom: 5, left: 3, right: 3),
                 height: 50,
@@ -180,7 +175,7 @@ class _BuyState extends State<Buy> {
 
                 Expanded(
                   child: new MaterialButton(//vai pra tela de end (enviar hora q se espera chegar como parametro)
-                    onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer())); },
+                    onPressed: (){ Navigator.push(context, MaterialPageRoute(builder: (context)=> new Timer(time: DateTimeField.combine(dia, hora).toString())));  },
                     child: new Text("Check Out", style: TextStyle(color: Colors.black),),
                     color: Colors.amber[100],
                   )
@@ -217,7 +212,8 @@ class _BuyState extends State<Buy> {
         "${place.thoroughfare}, ${place.name}, ${place.subLocality}, ${place.subAdministrativeArea} - ${place.administrativeArea}, ${place.postalCode}, ${place.country}";
 
         setState(() {
-          _ruaController = place.name;
+          _numeroController = place.name;
+          _ruaController = place.thoroughfare;
           _cidadeController = place.subAdministrativeArea;
           _estadoController = place.administrativeArea;
           _bairroController = place.subLocality;
@@ -234,5 +230,63 @@ class _BuyState extends State<Buy> {
     setState(() {
       this._metodoSelecionado = novoMetodo;
     });
+  }
+}
+
+TimeOfDay hora;
+DateTime dia;
+
+class BasicDateField extends StatelessWidget {
+  final format = DateFormat("dd-MM-yyyy");
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+      Text('Data'),
+      DateTimeField(
+        format: format,
+        onShowPicker: (context, currentValue) async {
+          final date = await showDatePicker(
+            context: context,
+            firstDate: DateTime(1900),
+            initialDate: DateTime.now(),
+            lastDate: DateTime(2100),
+            builder: (context, child) => Localizations.override(
+              context: context,
+              locale: Locale('pt'),
+              child: child,
+            ),
+          );
+          dia = date;
+          return date;
+        },
+      ),
+    ]);
+  }
+}
+
+
+class Clock24Example extends StatelessWidget {
+  final format = DateFormat("HH:mm");
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: <Widget>[
+      Text('Hora'),
+      DateTimeField(
+        format: format,
+        onShowPicker: (context, currentValue) async {
+          final time = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(alwaysUse24HourFormat: true),
+              child: child,
+            ),
+          );
+          hora = time;
+          return DateTimeField.convert(time);
+        },
+      ),
+    ]);
   }
 }
